@@ -12,8 +12,8 @@ public class Paciente extends Persona{
     private ArrayList<cita> citas;
     private ArrayList<consulta> historialMedico;
 
-    public Paciente(String id, String nombre, String apellido, LocalDate fechaNacimiento
-            String telefono, String email, String direccion, String historiaClinica
+    public Paciente(String id, String nombre, String apellido, LocalDate fechaNacimiento,
+            String telefono, String email, String direccion, String historiaClinica,
             String tipoSangre, String alerta, String medicamentosActuales){
                 super(id,nombre,apellido,fechaNacimiento,telefono,email,direccion);
                 this.historiaClinica=historiaClinica;
