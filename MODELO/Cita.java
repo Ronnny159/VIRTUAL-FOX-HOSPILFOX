@@ -1,6 +1,7 @@
 package MODELO;
 
 import ENUMS.EstadoCita;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -19,19 +20,19 @@ public class Cita {
         this.medico=medico;
         this.fechaHora=fechaHora;
         this.motivo=motivo;
-        this.estado=EStadoCita.AGENDADA;
+        this.estado=EstadoCita.AGENDADA;
         this.FechaCreacion=LocalDateTime.now();
         this.observaciones="";
     }
 
     public int getIdCita(){ return idCita; }
     public Paciente getPaciente(){ return paciente; }
-    public Medico getMedico(){ return Medico; }
+    public Medico getMedico(){ return medico; }
     public LocalDateTime getFechaHora(){return fechaHora; }
     public EstadoCita getEstadoCita(){return estado; }
     public String getMotivo(){return motivo; }
     public String getObservaciones(){return observaciones; }
-    public LocalDateTime getFechaCreacion(){return fechaCreacion; }
+    public LocalDateTime getFechaCreacion(){return FechaCreacion; }
 
     public void setIdCita(int idCita){this.idCita=idCita;}
     public void setPaciente(Paciente paciente){this.paciente=paciente; }

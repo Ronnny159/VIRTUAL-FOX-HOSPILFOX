@@ -27,7 +27,7 @@ public class Factura{
     }
 
     public int getIdFactura(){ return idFactura;}
-    public void setIdFactura(int idFactura){this.idFactura=idFactura}
+    public void setIdFactura(int idFactura){this.idFactura=idFactura;}
     public Paciente getPaciente(){ return paciente;}
     public ArrayList<DetalleFactura> getDetalles(){ return detalles;}
     public double getSubtotal(){ return subtotal;}
@@ -37,6 +37,11 @@ public class Factura{
     public boolean isPagada(){ return pagada;}
 
     public void agregarDetalle(TipoServicio servicio, String descripcion, int cantidad){
+        DetalleFactura detalle = new DetalleFactura(servicio,descripcion,servicio.getCostoBase(),cantidad);
+        detalles.add(detalle);
+        calcularTotales();
+    }
+    public void agregarDetallePersonalizado(String descripcion,double costo, int cantidad){
         DetalleFactura detalle = new DetalleFactura(null,descripcion,costo,cantidad);
         detalles.add(detalle);
         calcularTotales();

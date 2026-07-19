@@ -11,7 +11,7 @@ public enum Especialidad{
 
     private String nombre;
 
-    Especialidad(Sreing nombre){
+    Especialidad(String nombre){
         this.nombre=nombre;
     }
     public String getNombre(){

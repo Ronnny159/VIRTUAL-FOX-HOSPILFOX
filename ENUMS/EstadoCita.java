@@ -10,7 +10,7 @@ public enum EstadoCita{
 
     private String nombre;
 
-    Especialidad(Sreing nombre){
+    EstadoCita(String nombre){
         this.nombre=nombre;
     }
     public String getNombre(){

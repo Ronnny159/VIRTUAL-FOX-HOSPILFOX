@@ -1,6 +1,5 @@
 package MODELO;
 
-import ENUMS.EstadoCita;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -9,8 +8,8 @@ public class Paciente extends Persona{
     private String tipoSangre;
     private String alergias;
     private String medicamentosActuales;
-    private ArrayList<cita> citas;
-    private ArrayList<consulta> historialMedico;
+    private ArrayList<Cita> citas;
+    private ArrayList<Consulta > historialMedico;
 
     public Paciente(String id, String nombre, String apellido, LocalDate fechaNacimiento,
             String telefono, String email, String direccion, String historiaClinica,
@@ -23,17 +22,17 @@ public class Paciente extends Persona{
                 this.citas = new ArrayList<>();
                 this.historialMedico= new ArrayList<>();
             }
-    public String getHistorialClinica(){return historialClinica;}
+    public String getHistorialClinica(){return historiaClinica;}
     public String getTipoSangre(){return tipoSangre;}
     public String getAlergias(){return alergias;}
     public String getMedicamentoAcruales(){return medicamentosActuales;}
-    public ArrayList<citas> getCitas(){return citas;}
-    public ArrayList<consulta> getHistorialMedico(){return historialMedico;}
+    public ArrayList<Cita> getCitas(){return citas;}
+    public ArrayList<Consulta > getHistorialMedico(){return historialMedico;}
     
-    public void setHistorialClinica(String HistorialClinica){this.historiaClinica=historialClinica;}
+    public void setHistorialClinica(String HistoriaClinica){this.historiaClinica=historiaClinica;}
     public void setTipoSangre(String tipoSangre){this.tipoSangre=tipoSangre;}
-    public void setAlergias(String alergias){this.alergias=alergias}
-    public void setMedicamentosActuales(String medicamentosActuales){this.medicamentosActuales=medicamnetosActuales;}
+    public void setAlergias(String alergias){this.alergias=alergias;}
+    public void setMedicamentosActuales(String medicamentosActuales){this.medicamentosActuales=medicamentosActuales;}
     
     public void agregarCita(Cita cita){
         citas.add(cita);
@@ -60,7 +59,7 @@ public class Paciente extends Persona{
         }
         System.out.println("\n Citas de "+getNombreCompleto());
         System.out.println("============================================");
-        for(Consulta c:citas){
+        for(Cita c:citas){
             System.out.println(c);
         }
     }
