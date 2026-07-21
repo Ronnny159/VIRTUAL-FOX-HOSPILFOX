@@ -5,12 +5,15 @@ import MODELO.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class EpsService {
     private ArrayList<Paciente> pacientes;
     private ArrayList<Medico> medicos;
     private ArrayList<Cita> citas;
     private ArrayList<Factura> facturas;
+    private ArrayList<Consulta> consultas;
     private static int contadorCita=1;
     private static int contadorConsulta=1;
     private static int contadorFactura=1;
@@ -50,6 +53,15 @@ public class EpsService {
         for(Paciente p: pacientes){
             if(p.getId().equals(id)){
                 return p;
+            }
+        }
+        return null;
+    }
+
+    public Consulta buscarConsulta(int idConsulta){
+        for(Consulta c: consultas){
+            if(c.getIdConsulta()==idConsulta){
+                return c;
             }
         }
         return null;
@@ -281,20 +293,50 @@ public class EpsService {
         System.out.println("Factura no enonctrada");
     }
 
-    public void mostrarEstadisticas(){
-        System.out.println("\n ESTADISTICAS DEL SISTEMA ");
-        System.out.println("=============================");
-        System.out.println("Total de pacientes: "+pacientes.size());
-        System.out.println("Total de medicos: "+medicos.size());
-        System.out.println("Total de citas: "+citas.size());
+    public ArrayList<Paciente> getPacientes(){return new ArrayList<>(pacientes);}
+    public ArrayList<Medico> getMedicos(){return new ArrayList<>(medicos);}
+    public ArrayList<Cita> getCitas(){return new ArrayList<>(citas);}
+    public ArrayList<Factura> getFacturas(){return new ArrayList<>(facturas);}
+    public ArrayList<Consulta> getConsultas(){return new ArrayList<>(consultas);}
 
-        long citasCompletadas = citas.stream().filter(c -> c.getEstadoCita()==EstadoCita.COMPLETADA).count();
-        System.out.println("Citas completadas: "+citasCompletadas);
-        long citascanceladas = citas.stream().filter(c -> c.getEstadoCita()==EstadoCita.CANCELADA).count();
-        System.out.println("Citas canceladas: "+citascanceladas);
-        double totalFacturado=facturas.stream().filter(Factura::isPagada).mapToDouble(Factura::getTotal).sum();
-        System.out.printf("Total facturado: $%.2f\n", totalFacturado);
-        double totalPendiente=facturas.stream().filter(f-> ! f.isPagada()).mapToDouble(Factura::getTotal).sum();
-        System.out.printf("Total pendiente: $%.2f\n", totalPendiente);
+    public boolean eliminarPaciente(String id){
+        Paciente paciente = buscarPaciente(id);
+        if(paciente == null){
+            System.out.println("Paciente no encontrado");
+            return false;
+        }
+        pacientes.remove(paciente);
+        System.out.println("Paciente eliminado exitosamente");
+        return true;
     }
+
+    public boolean eliminarMedico(String id){
+        Medico medico = buscarMedico(id);
+        if(medico == null){
+            System.out.println("Medico no encontrado");
+            return false;
+        }
+        medicos.remove(medico);
+        System.out.println("Medico eliminado exitosamente");
+        return true;
+    }
+
+    public int getTotalPacientes(){return pacientes.size();}
+    public int getTotalMedicos(){return medicos.size();}
+    public int getTotalCitas(){return citas.size();}
+    public int getTotalFacturas(){return facturas.size();}
+    public int getTotalConsultas(){return consultas.size();}
+    public double getTotalFacturado(){return facturas.stream().mapToDouble(Factura::getTotal).sum();}
+    public double getTotalPendiente(){return facturas.stream().filter(f -> !f.isPagada()).mapToDouble(Factura::getTotal).sum();}
+    public List<Cita> getCitasPorEstado(EstadoCita estado){return citas.stream().filter(c -> c.getEstadoCita() == estado).collect(Collectors.toList());}
+    public List<Cita> getCitasPorPaciente(String pacienteId){return citas.stream().filter(c -> c.getPaciente().getId().equals(pacienteId)).collect(Collectors.toList());}
+    public List<Cita> getCitasPorMedico(String medicoId){return citas.stream().filter(c -> c.getMedico().getId().equals(medicoId)).collect(Collectors.toList());}
+    public List<Consulta> getConsultasPorPaciente(String pacienteId){return consultas.stream().filter(c -> c.getCita().getPaciente().getId().equals(pacienteId)).collect(Collectors.toList());}
+    public List<Paciente> buscarPacientesPorNombre(String nombre){return pacientes.stream().filter(p -> p.getNombreCompleto().toLowerCase().contains(nombre.toLowerCase())).collect(Collectors.toList());}
+    public List<Medico> buscarMedicosPorEspecialidad(Especialidad especialidad){return medicos.stream().filter(m -> m.getEspecialidad() == especialidad).collect(Collectors.toList());}
+    public List<Medico> getMedicosDisponibles(){return medicos.stream().filter(Medico::isDisponible).collect(Collectors.toList());}
+
+    public boolean existePaciente(String id){return buscarPaciente(id) != null;}
+    public boolean existeMedico(String id){return buscarMedico(id) != null;}
+    public boolean existeCita(int idCita){return buscarCita(idCita) != null;}
 }
