@@ -67,6 +67,15 @@ public class EpsService {
         return null;
     }
 
+    public Factura buscarFactura(int idFactura) {
+        for(Factura f: facturas){
+            if(f.getIdFactura()==idFactura){
+                return f;
+            }
+        }
+        return null;
+    }
+
     public Medico buscarMedico(String id){
         for(Medico m: medicos){
             if(m.getId().equals(id)){
