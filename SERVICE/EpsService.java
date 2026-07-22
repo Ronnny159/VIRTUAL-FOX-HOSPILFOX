@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class EpsService {
-    private ArrayList<Paciente> pacientes;
-    private ArrayList<Medico> medicos;
-    private ArrayList<Cita> citas;
-    private ArrayList<Factura> facturas;
-    private ArrayList<Consulta> consultas;
+    private ArrayList<Paciente> pacientes = new ArrayList<>();  // ✅ INICIALIZAR
+    private ArrayList<Medico> medicos = new ArrayList<>();      // ✅ INICIALIZAR
+    private ArrayList<Cita> citas = new ArrayList<>();          // ✅ INICIALIZAR
+    private ArrayList<Consulta> consultas = new ArrayList<>();  // ✅ INICIALIZAR
+    private ArrayList<Factura> facturas = new ArrayList<>(); 
     private static int contadorCita=1;
     private static int contadorConsulta=1;
     private static int contadorFactura=1;
