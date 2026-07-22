@@ -8,15 +8,16 @@ public class MainFrame extends JFrame {
     private EpsService epsService;
     private JTabbedPane tabbedPane;
 
-    private PanelPacientes panelPacientes;
+    private PanelPaciente panelPacientes;
     private PanelMedicos panelMedicos;
     private PanelCitas panelCitas;
-    private PanelConsultorios panelConsultorios;
+    private PanelConsultas panelConsultorios;
     private PanelFacturas panelFacturas;
 
     public MainFrame() {
         epsService = new EpsService();
         initComponents();
+        cargarDatosEjemplo();
         setTitle("Sistema de Gestión Hospitalaria/EPS");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1200, 700);
@@ -42,10 +43,10 @@ public class MainFrame extends JFrame {
         menuBar.add(menuAyuda);
         setJMenuBar(menuBar);
 
-        panelPacientes = new PanelPacientes(epsService);
+        panelPacientes = new PanelPaciente(epsService);
         panelMedicos = new PanelMedicos(epsService);
         panelCitas = new PanelCitas(epsService);
-        panelConsultorios = new PanelConsultorios(epsService);
+        panelConsultorios = new PanelConsultas(epsService);
         panelFacturas = new PanelFacturas(epsService);
 
         tabbedPane.addTab("Pacientes", panelPacientes);
@@ -80,16 +81,5 @@ public class MainFrame extends JFrame {
                 java.time.LocalDate.of(1980, 9, 20), "3107654321",
                 "laura@email.com", "Carrera 34 #56-78",
                 "RM-002", ENUMS.Especialidad.CARDIOLOGIA, 80000);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            try {
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            new MainFrame();// Cargar datos de ejemplo al iniciar la aplicación
-        });
     }
 }

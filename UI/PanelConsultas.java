@@ -3,7 +3,6 @@ package UI;
 import SERVICE.EpsService;
 import javax.swing.*;
 import MODELO.Consulta;
-import MODELO.Cita;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.time.format.DateTimeFormatter;

@@ -184,7 +184,7 @@ public class DialogoPaciente extends JDialog {
                 paciente.setTelefono(telefono);
                 paciente.setEmail(email);
                 paciente.setDireccion(direccion);
-                paciente.setHistorialClinica(historiaClinica);
+                paciente.setHistoriaClinica(historiaClinica);
                 paciente.setTipoSangre(tipoSangre);
                 paciente.setAlergias(alergias);
                 paciente.setMedicamentosActuales(medicamentosActuales);

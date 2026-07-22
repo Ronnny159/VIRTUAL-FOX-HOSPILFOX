@@ -169,7 +169,7 @@ public class EpsService {
         return consulta;
     }
 
-    public Factura generarFactura(String pacienteId,ArrayList<TipoServicio> servicios){
+    public Factura generarFactura(String pacienteId,List<TipoServicio> serviciosSeleccionados){
         Paciente paciente = buscarPaciente(pacienteId);
         if(paciente==null){
             System.out.println("Paciente no encontrado");
@@ -179,7 +179,7 @@ public class EpsService {
         Factura factura= new Factura(paciente);
         factura.setIdFactura(contadorFactura++);
 
-        for(TipoServicio servicio:servicios){
+        for(TipoServicio servicio:serviciosSeleccionados){
             factura.agregarDetalle(servicio, servicio.getNombre(), 1);
         }
 
@@ -327,14 +327,29 @@ public class EpsService {
     public int getTotalFacturas(){return facturas.size();}
     public int getTotalConsultas(){return consultas.size();}
     public double getTotalFacturado(){return facturas.stream().mapToDouble(Factura::getTotal).sum();}
-    public double getTotalPendiente(){return facturas.stream().filter(f -> !f.isPagada()).mapToDouble(Factura::getTotal).sum();}
-    public List<Cita> getCitasPorEstado(EstadoCita estado){return citas.stream().filter(c -> c.getEstadoCita() == estado).collect(Collectors.toList());}
-    public List<Cita> getCitasPorPaciente(String pacienteId){return citas.stream().filter(c -> c.getPaciente().getId().equals(pacienteId)).collect(Collectors.toList());}
-    public List<Cita> getCitasPorMedico(String medicoId){return citas.stream().filter(c -> c.getMedico().getId().equals(medicoId)).collect(Collectors.toList());}
-    public List<Consulta> getConsultasPorPaciente(String pacienteId){return consultas.stream().filter(c -> c.getCita().getPaciente().getId().equals(pacienteId)).collect(Collectors.toList());}
-    public List<Paciente> buscarPacientesPorNombre(String nombre){return pacientes.stream().filter(p -> p.getNombreCompleto().toLowerCase().contains(nombre.toLowerCase())).collect(Collectors.toList());}
-    public List<Medico> buscarMedicosPorEspecialidad(Especialidad especialidad){return medicos.stream().filter(m -> m.getEspecialidad() == especialidad).collect(Collectors.toList());}
-    public List<Medico> getMedicosDisponibles(){return medicos.stream().filter(Medico::isDisponible).collect(Collectors.toList());}
+    public double getTotalPendiente(){
+        return facturas.stream().filter(f -> !f.isPagada())
+        .mapToDouble(Factura::getTotal).sum();}
+    public List<Cita> getCitasPorEstado(EstadoCita estado){
+        return citas.stream().filter(c -> c.getEstadoCita() == estado)
+        .collect(Collectors.toList());}
+    public List<Cita> getCitasPorPaciente(String pacienteId){
+        return citas.stream().filter(c -> c.getPaciente().getId().equals(pacienteId))
+        .collect(Collectors.toList());}
+    public List<Cita> getCitasPorMedico(String medicoId){
+        return citas.stream().filter(c -> c.getMedico().getId().equals(medicoId))
+        .collect(Collectors.toList());}
+    public List<Consulta> getConsultasPorPaciente(String pacienteId){
+        return consultas.stream().filter(c -> c.getCita().getPaciente().getId().equals(pacienteId))
+        .collect(Collectors.toList());}
+    public List<Paciente> buscarPacientesPorNombre(String nombre){
+        return pacientes.stream().filter(p -> p.getNombreCompleto().toLowerCase()
+        .contains(nombre.toLowerCase())).collect(Collectors.toList());}
+    public List<Medico> buscarMedicosPorEspecialidad(Especialidad especialidad){
+        return medicos.stream().filter(m -> m.getEspecialidad() == especialidad)
+        .collect(Collectors.toList());}
+    public List<Medico> getMedicosDisponibles(){
+        return medicos.stream().filter(Medico::isDisponible).collect(Collectors.toList());}
 
     public boolean existePaciente(String id){return buscarPaciente(id) != null;}
     public boolean existeMedico(String id){return buscarMedico(id) != null;}

@@ -12,16 +12,17 @@ public class Paciente extends Persona{
     private ArrayList<Consulta > historialMedico;
 
     public Paciente(String id, String nombre, String apellido, LocalDate fechaNacimiento,
-            String telefono, String email, String direccion, String historiaClinica,
-            String tipoSangre, String alerta, String medicamentosActuales){
-                super(id,nombre,apellido,fechaNacimiento,telefono,email,direccion);
-                this.historiaClinica=historiaClinica;
-                this.tipoSangre=tipoSangre;
-                this.alergias=alergias;
-                this.medicamentosActuales=medicamentosActuales;
+            String telefono, String email, String direccion,
+            String historiaClinica, String tipoSangre, String alergias,
+            String medicamentosActuales) {
+                super(id, nombre, apellido, fechaNacimiento, telefono, email, direccion);
+                this.historiaClinica = historiaClinica;  
+                this.tipoSangre = tipoSangre;
+                this.alergias = alergias;               
+                this.medicamentosActuales = medicamentosActuales;
                 this.citas = new ArrayList<>();
-                this.historialMedico= new ArrayList<>();
-            }
+                this.historialMedico = new ArrayList<>();
+    }
     public String getHistorialClinica(){return historiaClinica;}
     public String getTipoSangre(){return tipoSangre;}
     public String getAlergias(){return alergias;}
@@ -29,7 +30,7 @@ public class Paciente extends Persona{
     public ArrayList<Cita> getCitas(){return citas;}
     public ArrayList<Consulta > getHistorialMedico(){return historialMedico;}
     
-    public void setHistorialClinica(String HistoriaClinica){this.historiaClinica=historiaClinica;}
+    public void setHistoriaClinica(String historiaClinica) { this.historiaClinica = historiaClinica; }
     public void setTipoSangre(String tipoSangre){this.tipoSangre=tipoSangre;}
     public void setAlergias(String alergias){this.alergias=alergias;}
     public void setMedicamentosActuales(String medicamentosActuales){this.medicamentosActuales=medicamentosActuales;}
