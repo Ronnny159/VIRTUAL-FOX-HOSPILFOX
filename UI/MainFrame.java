@@ -2,10 +2,7 @@ package UI;
 
 import SERVICE.EpsService;
 import javax.swing.*;
-import MODELO.Paciente;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 
 public class MainFrame extends JFrame {
